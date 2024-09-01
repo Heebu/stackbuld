@@ -4,8 +4,8 @@ import 'package:smart_text_flutter/smart_text_flutter.dart';
 
 import '../Utils/ui_sizes.dart';
 
-class TitleTextWidget extends StatelessWidget {
-  TitleTextWidget({
+class Text1 extends StatelessWidget {
+  Text1({
     super.key,
     required this.text,
     this.color = Colors.black,
@@ -28,15 +28,17 @@ class TitleTextWidget extends StatelessWidget {
   }
 }
 
-class MainTextWidget extends StatelessWidget {
-  MainTextWidget({
+class Text2 extends StatelessWidget {
+  Text2({
     super.key,
     required this.text,
     this.color = Colors.black,
+    this.isBold = false,
   });
 
   final String text;
   Color? color;
+  bool? isBold;
 
   @override
   Widget build(BuildContext context) {
@@ -46,13 +48,14 @@ class MainTextWidget extends StatelessWidget {
           style: TextStyle(
               color: color,
               fontSize: MyTextSizes().textSize1,
-              fontWeight: FontWeight.bold)),
+              fontWeight:
+                  isBold == true ? FontWeight.bold : FontWeight.normal)),
     );
   }
 }
 
-class NormalTexts extends StatelessWidget {
-const  NormalTexts({super.key, required this.text, this.color, this.isBold = false});
+class Text3 extends StatelessWidget {
+  const Text3({super.key, required this.text, this.color, this.isBold = false});
 
   final String text;
   final Color? color;
@@ -94,8 +97,9 @@ class SmallSmartTexts extends StatelessWidget {
   Widget build(BuildContext context) {
     return SmartText(
       text,
-      strutStyle: StrutStyle(fontSize:  MyTextSizes().textSize3,),
-
+      strutStyle: StrutStyle(
+        fontSize: MyTextSizes().textSize3,
+      ),
     );
   }
 }
@@ -109,12 +113,8 @@ class ContentSmartTexts extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: TextStyle(fontSize:  text.length / 2, fontWeight: FontWeight.w700),
+      style: TextStyle(fontSize: text.length / 2, fontWeight: FontWeight.w700),
       textAlign: TextAlign.center,
-
     );
   }
 }
-
-
-

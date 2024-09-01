@@ -1,54 +1,55 @@
 import 'package:flutter/material.dart';
 
+import 'images.dart';
+
 List<String> sexGender = ['Male', 'Female'];
-List<String> occupations = [
-  'Student',
-  'Alumni',
-  'Teaching staff',
-  'Non teaching staff',
-  // 'Vendor',
-  'Others'
+List<String> categories = [
+  'Women',
+  'Men',
+  'Teens',
+  'Kids',
+  'Old Men',
+  'Old women',
+  'Others',
 ];
-List<String> studentType = [
-  'Undergraduate',
-  'Post-Graduate',
-  'Masters',
-  'pre Degree'
+List catImages = [
+  AllImages().womenImage,
+  AllImages().menImage,
+  AllImages().teenImage,
+  AllImages().kidImage,
+  AllImages().oldMenImage,
+  AllImages().oldWomenImage,
+  AllImages().othersImage,
 ];
-List<String> levels = [
-  '100 level',
-  '200 level',
-  '300 level',
-  '400 level',
-  '500 level',
-  '600 level'
+List<String> itemTypes = [
+  'Bag',
+  'Watch',
+  'Wallet',
+  'Underwear',
+  'shoe',
+  'belt',
+  'Jewelries',
+  'Others',
 ];
-List<String> locations = [
-  'Gate',
-  'Harmony',
-  'Accord',
-  'Isolu cele',
-  'Main Isolu',
-  'Isolu Catholic',
-  'FUNIS',
-  'FUNAAB Zoo',
-  'MANCOT Park',
-  'Camp',
-  'Apakila',
-  'Fatola',
-  'Odoeran',
-  'Oshiele',
-  'Others'
+
+List<String> sizes = [
+  'S',
+  'M',
+  'L',
+  'XL',
+  'XXL',
+  'XXXL',
 ];
-List<String> colleges = [
-  'COLFHEC',
-  'COLEM',
-  'COLNASS',
-  'COLPHYS',
-  'COBIOS',
-  'COLPLANT',
-  'COLVET',
-  'COLAMROD',
+
+List<String> colorItem = [
+  'Red',
+  'Blue',
+  'Black',
+  'White',
+  'Sliver',
+  'Golden',
+  'Green',
+  'Pink',
 ];
 
 class CatsModel {
@@ -58,43 +59,40 @@ class CatsModel {
   const CatsModel({
     required this.name,
     required this.color,
-
   });
 }
 
-
-
 List<CatsModel> catsProperties = [
   CatsModel(
-      name: 'electronics',
-      color: Colors.green.shade100,),
+    name: 'electronics',
+    color: Colors.green.shade100,
+  ),
   CatsModel(
-      name: 'cloths',
-      color: Colors.blueAccent.shade100,
-      ),
+    name: 'cloths',
+    color: Colors.blueAccent.shade100,
+  ),
   CatsModel(
-      name: 'food stuffs',
-      color: Colors.brown.shade100,
-      ),
+    name: 'food stuffs',
+    color: Colors.brown.shade100,
+  ),
   CatsModel(
-      name: 'laptops',
-      color: Colors.purple.shade100,
-      ),
+    name: 'laptops',
+    color: Colors.purple.shade100,
+  ),
   CatsModel(
-      name: 'phones',
-      color: Colors.orangeAccent.shade100,
-      ),
+    name: 'phones',
+    color: Colors.orangeAccent.shade100,
+  ),
   CatsModel(
-      name: 'furniture',
-      color: Colors.redAccent.shade100,
-     ),
+    name: 'furniture',
+    color: Colors.redAccent.shade100,
+  ),
   CatsModel(
-      name: 'automobiles',
-      color: Colors.amber.shade100,
-      ),
+    name: 'automobiles',
+    color: Colors.amber.shade100,
+  ),
   CatsModel(
-      name: 'others',
-      color: Colors.indigoAccent.shade100,
-      ),
-
+    name: 'others',
+    color: Colors.indigoAccent.shade100,
+  ),
 ];

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
-
 import 'core/reuseable/Routes/mobile_routes.dart';
 import 'core/reuseable/Utils/app_theme.dart';
-
 
 void main() async {
   // WidgetsFlutterBinding.ensureInitialized();
@@ -29,16 +27,18 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         ensureScreenSize: true,
         splitScreenMode: true,
-        builder: (context, _) => ViewModelBuilder<MyThemes>.reactive(
+        builder: (context, _) =>
+        ViewModelBuilder<MyThemes>.reactive(
           viewModelBuilder: () => MyThemes(),
-          builder: (context, model, child) => MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'Sell X',
-            themeMode: model.themeMode,
-            darkTheme: MyThemeData().darkTheme,
-            theme: model.themeData,
-            routes: route,
-          ),
+          builder: (context, model, child) =>
+              MaterialApp(
+                debugShowCheckedModeBanner: false,
+                title: 'StackBuld',
+                themeMode: model.themeMode,
+                darkTheme: MyThemeData().darkTheme,
+                theme: model.themeData,
+                routes: route,
+              ),
         ),
       ),
     );

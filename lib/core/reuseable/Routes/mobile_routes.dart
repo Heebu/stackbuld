@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 
 import '../../../views/auth_pages/login.dart';
-import '../../../views/user_home/home_view.dart';
+import '../../../views/user_screen/HomeScreen/home_view.dart';
+import '../../../views/user_screen/main_page_view.dart';
 
 Map<String, Widget Function(BuildContext)> route = {
-  '/': (context) => const UserHome(),
+  '/': (context) => const MainPageView(),
+  'user_home': (context) => const UserHome(),
   '/login': (context) => const LoginView(),
 };
 
