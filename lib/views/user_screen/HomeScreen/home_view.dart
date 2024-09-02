@@ -25,7 +25,7 @@ class UserHome extends StatelessWidget {
                 height: 150.h,
                 child: PageView.builder(
                   itemBuilder: (context, index) => Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         color: Colors.grey,
                         image: DecorationImage(
                             image: NetworkImage(
@@ -94,7 +94,7 @@ class UserHome extends StatelessWidget {
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
                             return MyItemBox(
-                              itemModel: ItemModel(
+                              itemModel: const ItemModel(
                                   itemName: 'Versasse dress',
                                   description:
                                       'This is an exclusive wear for everyone ',

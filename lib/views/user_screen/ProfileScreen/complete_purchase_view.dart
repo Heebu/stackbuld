@@ -89,7 +89,7 @@ class CompletePurchaseView extends StatelessWidget {
                                       );
                                     },
                                     separatorBuilder: (context, index) =>
-                                        Divider(),
+                                        const Divider(),
                                     itemCount: itemDetails.length)),
                             Row(
                               children: [
@@ -103,7 +103,7 @@ class CompletePurchaseView extends StatelessWidget {
                                   date,
                                   style: TextStyle(fontSize: TextSize.caption3),
                                 ),
-                                Spacer(),
+                                const Spacer(),
                                 Text(status,
                                     style: TextStyle(
                                         fontWeight: FontWeight.w700,

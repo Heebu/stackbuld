@@ -57,8 +57,8 @@ class MyItemBox extends StatelessWidget {
                                   : itemModel.favorites.add('Idris Adedeji');
                             },
                             icon: itemModel.favorites.contains('Idris Adedeji')
-                                ? Icon(Icons.favorite)
-                                : Icon(Icons.favorite_border)))
+                                ? const Icon(Icons.favorite)
+                                : const Icon(Icons.favorite_border)))
                   ])),
               Container(
                   child: Column(
@@ -67,7 +67,7 @@ class MyItemBox extends StatelessWidget {
                       Row(
                         children: [
                           Text3(text: itemModel.brandName),
-                          Icon(
+                          const Icon(
                             Icons.star,
                             color: Colors.yellow,
                           ),

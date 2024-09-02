@@ -18,7 +18,7 @@ class MainPageView extends StatelessWidget {
       builder: (context, viewModel, child) {
         return Scaffold(
           appBar: AppBar(
-            leading: CircleAvatar(),
+            leading: const CircleAvatar(),
             centerTitle: false,
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,7 +33,7 @@ class MainPageView extends StatelessWidget {
             actions: [
               IconButton(
                 onPressed: () {},
-                icon: Icon(Icons.notifications_active),
+                icon: const Icon(Icons.notifications_active),
               )
             ],
           ),
@@ -42,7 +42,7 @@ class MainPageView extends StatelessWidget {
               viewModel.onChangePage(value);
             },
             controller: viewModel.pageController,
-            children: [
+            children: const [
               UserHome(),
               SearchView(),
               ProfileView(),
@@ -53,7 +53,7 @@ class MainPageView extends StatelessWidget {
               viewModel.onChangePage(value);
             },
             currentIndex: viewModel.pageNumber,
-            items: [
+            items: const [
               BottomNavigationBarItem(
                   icon: Icon(Icons.home, color: Colors.grey),
                   label: 'Home',

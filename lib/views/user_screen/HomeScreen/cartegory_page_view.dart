@@ -29,7 +29,7 @@ class CategoryPageView extends StatelessWidget {
                   mainAxisExtent: 250.h,
                   crossAxisSpacing: 3.w),
               itemBuilder: (context, index) => MyItemBox(
-                itemModel: ItemModel(
+                itemModel: const ItemModel(
                     itemName: 'Versasse dress',
                     description: 'This is an exclusive wear for everyone ',
                     brandName: 'H&M',

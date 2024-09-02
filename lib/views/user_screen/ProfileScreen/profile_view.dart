@@ -25,7 +25,7 @@ class ProfileView extends StatelessWidget {
                     height: 100.h,
                     width: 100.w,
                     decoration: BoxDecoration(
-                        image: DecorationImage(
+                        image: const DecorationImage(
                             image: NetworkImage('viewModel.profilePics'),
                             fit: BoxFit.cover),
                         color: Colors.green.shade200,
@@ -40,7 +40,7 @@ class ProfileView extends StatelessWidget {
                 text: 'viewModel.name',
               ),
             ),
-            Center(
+            const Center(
               child: Text3(
                 text: 'viewModel.email',
               ),

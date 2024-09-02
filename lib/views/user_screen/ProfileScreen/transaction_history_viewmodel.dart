@@ -90,7 +90,7 @@ class TransactionHistoryViewmodel extends StatelessWidget {
                                       );
                                     },
                                     separatorBuilder: (context, index) =>
-                                        Divider(),
+                                        const Divider(),
                                     itemCount: itemDetails.length)),
                             Row(
                               children: [
@@ -104,7 +104,7 @@ class TransactionHistoryViewmodel extends StatelessWidget {
                                   date,
                                   style: TextStyle(fontSize: TextSize.caption3),
                                 ),
-                                Spacer(),
+                                const Spacer(),
                                 Text(status,
                                     style: TextStyle(
                                         fontWeight: FontWeight.w700,

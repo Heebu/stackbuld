@@ -20,12 +20,12 @@ class SearchView extends StatelessWidget {
             child: Column(
               children: [
                 SearchBar(
-                  leading: Icon(Icons.search),
+                  leading: const Icon(Icons.search),
                   textCapitalization: TextCapitalization.sentences,
                   onChanged: (value) {},
                   hintText: 'Search for item',
                 ),
-                Container(
+                SizedBox(
                   height: 50.h,
                   child: ListView.separated(
                       scrollDirection: Axis.horizontal,
@@ -58,7 +58,7 @@ class SearchView extends StatelessWidget {
                           mainAxisExtent: 250.h,
                           crossAxisSpacing: 3.w),
                       itemBuilder: (context, index) => MyItemBox(
-                        itemModel: ItemModel(
+                        itemModel: const ItemModel(
                             itemName: 'Versasse dress',
                             description:
                                 'This is an exclusive wear for everyone ',

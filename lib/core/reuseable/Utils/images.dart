@@ -6,4 +6,6 @@ class AllImages {
   String oldMenImage = 'images/oldman_image.png';
   String oldWomenImage = 'images/oldwoman_image.png';
   String othersImage = 'images/female_image.png';
+  String appIcon = 'images/app_logo.png';
+  String appIconLong = 'images/app_logo_long.png';
 }

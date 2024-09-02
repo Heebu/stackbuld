@@ -25,7 +25,7 @@ class MainPageViewmodel extends BaseViewModel {
 
   onChangePage(value) {
     pageController.animateToPage(value,
-        duration: Duration(seconds: 1), curve: Curves.linear);
+        duration: const Duration(seconds: 1), curve: Curves.linear);
     pageNumber = value;
     notifyListeners();
   }

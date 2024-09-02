@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../../../core/reuseable/Utils/service_error_messages.dart';
+
 class Auths {
   //sign in
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -49,29 +51,27 @@ class Auths {
     return result;
   }
 
-
   Future<String> addCredInfo(
-      String firstName,
-      String lastName,
-      String email,
-      String password,
-      ) async {
+    String firstName,
+    String lastName,
+    String email,
+    String password,
+  ) async {
     String result = 'An unexpected error occurred';
     CollectionReference usersCollection =
-    FirebaseFirestore.instance.collection('Users');
+        FirebaseFirestore.instance.collection('Users');
     try {
       final User? user = FirebaseAuth.instance.currentUser;
 
-        final String uid = user!.uid;
-        await usersCollection.doc(uid).set({
-          'firstName': firstName,
-          'lastName': lastName,
-          'email': email,
-          'password': password,
-          'uid': uid,
-          'time': DateTime.now(),
-        });
-
+      final String uid = user!.uid;
+      await usersCollection.doc(uid).set({
+        'firstName': firstName,
+        'lastName': lastName,
+        'email': email,
+        'password': password,
+        'uid': uid,
+        'time': DateTime.now(),
+      });
     } catch (e) {
       result = e.toString();
     }
@@ -82,12 +82,7 @@ class Auths {
   Future<String> addMoreInfo(
     String phoneNumber,
     String whatsappNumber,
-    String student,
-    String occupation,
-    String level,
     String location,
-    String collage,
-    String matricNumber,
     String sex,
   ) async {
     String result = 'An unexpected error occurred';
@@ -97,34 +92,15 @@ class Auths {
       final User? user = FirebaseAuth.instance.currentUser;
       if (user != null) {
         final String uid = user.uid;
-       if(occupation == 'Student'){
-         await usersCollection.doc(uid).update({
-           'phoneNumber': phoneNumber,
-           'profilePicture': 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541',
-           'whatsAppNumber': whatsappNumber,
-           'location': location,
-           'school': 'FUNAAB',
-           'studentType': student,
-           'matricNumber': matricNumber,
-           'level': level,
-           'occupation': occupation,
-           'collage': collage,
-           'gender': sex,
-         });
-       } else{
-         await usersCollection.doc(uid).update({
-           'phoneNumber': phoneNumber,
-           'profilePicture': '',
-           'whatsAppNumber': whatsappNumber,
-           'location': location,
-           'school': 'FUNAAB',
-           'occupation': occupation,
-           'gender': sex,
-         });
-       }
+        await usersCollection.doc(uid).update({
+          'phoneNumber': phoneNumber,
+          'profilePicture': '',
+          'whatsAppNumber': whatsappNumber,
+          'location': location,
+          'gender': sex,
+        });
         result = 'success';
         bool isVerified = user.emailVerified;
-        // If the email is not verified, show an error message
         if (!isVerified) {
           result = 'Please click the link in your email to verify your account';
         }
@@ -142,7 +118,7 @@ class Auths {
       await auth.sendPasswordResetEmail(email: email);
       result = 'success';
     } catch (e) {
-     result =  getErrorMessage(e);
+      result = getErrorMessage(e);
     }
     return result;
   }
@@ -192,26 +168,5 @@ class Auths {
       result = getErrorMessage(e);
     }
     return result;
-  }
-
-// error messages
-  String getErrorMessage(e) {
-    if (e is FirebaseAuthException) {
-      if (e.code == 'user-not-found') {
-        return 'User not found. Please check your email';
-      } else if (e.code == 'wrong-password') {
-        return 'Incorrect password';
-      } else if (e.code == 'network-request-failed') {
-        return 'Network request failed. Please check your internet connection';
-      } else if (e.code == 'invalid-email') {
-        return 'Invalid email address';
-      } else if (e.code == 'weak-password') {
-        return 'The password is too weak';
-      } else if (e.code == 'email-already-in-use') {
-        return 'The email address is already in use';
-      }
-      return 'Firebase error: ${e.code}';
-    }
-    return 'An unexpected error occurred';
   }
 }

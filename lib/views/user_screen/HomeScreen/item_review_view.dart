@@ -29,7 +29,7 @@ class ItemReviewView extends StatelessWidget {
                       onPressed: () {
                         viewModel.onAddToCart();
                       },
-                      icon: Icon((Icons.add_shopping_cart)))
+                      icon: const Icon((Icons.add_shopping_cart)))
                 ],
                 expandedHeight: 350.h,
                 collapsedHeight: 150.h,
@@ -55,14 +55,14 @@ class ItemReviewView extends StatelessWidget {
                     Row(
                       children: [
                         Text3(text: item.brandName),
-                        Icon(
+                        const Icon(
                           Icons.star,
                           color: Colors.yellow,
                         ),
                         Text3(
                             text: item.ratings.length.toString(), isBold: true),
                         Text3(text: index.toString()),
-                        Spacer(),
+                        const Spacer(),
                         IconButton(
                             onPressed: () {
                               viewModel.favorited();
