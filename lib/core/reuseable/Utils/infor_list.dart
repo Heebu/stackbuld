@@ -22,6 +22,7 @@ List catImages = [
   AllImages().othersImage,
 ];
 List<String> itemTypes = [
+  'Dress',
   'Bag',
   'Watch',
   'Wallet',

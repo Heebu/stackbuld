@@ -15,6 +15,7 @@ class UserHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
+      onViewModelReady: (viewModel) => viewModel.initClass(),
       viewModelBuilder: () => HomeViewmodel(),
       builder: (context, viewModel, child) {
         return SingleChildScrollView(
@@ -29,7 +30,8 @@ class UserHome extends StatelessWidget {
                         color: Colors.grey,
                         image: DecorationImage(
                             image: NetworkImage(
-                                'https://www.vdo.ai/blog/wp-content/uploads/2022/01/Blog-Header-22.png'))),
+                                'https://www.vdo.ai/blog/wp-content/uploads/2022/01/Blog-Header-22.png'),
+                            fit: BoxFit.cover)),
                   ),
                 ),
               ),
@@ -94,25 +96,11 @@ class UserHome extends StatelessWidget {
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
                             return MyItemBox(
-                              itemModel: const ItemModel(
-                                  itemName: 'Versasse dress',
-                                  description:
-                                      'This is an exclusive wear for everyone ',
-                                  brandName: 'H&M',
-                                  colors: ['red', 'blue', 'green'],
-                                  favorites: [],
-                                  images: [
-                                    'https://e7.pngegg.com/pngimages/46/284/png-clipart-cocktail-dress-clothing-sleeve-prom-blue-tee-dress-blue-orange-thumbnail.png',
-                                    'https://png.pngtree.com/png-clipart/20210725/original/pngtree-wedding-dress-clipart-blue-color-illustration-design-png-image_6557291.jpg'
-                                  ],
-                                  itemPrice: 2000,
-                                  newPrice: 1500,
-                                  ratings: [],
-                                  sizes: ['M', 'L', 'XL', 'XXL']),
+                              itemModel: viewModel.items[index],
                               index: index,
                             );
                           },
-                          itemCount: 3,
+                          itemCount: viewModel.items.length,
                         )),
                   ],
                 ),

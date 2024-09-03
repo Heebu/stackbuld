@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stackbuld/model/cart_model.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../core/reuseable/Widgets/mainTextWidget.dart';
-import '../../../model/item_model.dart';
-import '../../../viewmodel/user_screen/item_review_viewmodel.dart';
+import '../../../viewmodel/user_screen/edit_cart_viewmodel.dart';
+import '../HomeScreen/item_review_view.dart';
 
-class ItemReviewView extends StatelessWidget {
-  const ItemReviewView({super.key, required this.item, required this.index});
+class EditCartView extends StatelessWidget {
+  const EditCartView({super.key, required this.cartItem});
 
-  final ItemModel item;
-  final int index;
+  final CartModel cartItem;
 
   @override
   Widget build(BuildContext context) {
-    bool favorite = item.favorites.contains('Idris Adedeji');
     return ViewModelBuilder.reactive(
-      onViewModelReady: (viewModel) => viewModel.initClass(item, favorite),
-      viewModelBuilder: () => ItemReviewViewmodel(),
+      onViewModelReady: (viewModel) => viewModel.initClass(cartItem.itemId),
+      viewModelBuilder: () => EditCartViewmodel(),
       builder: (context, viewModel, child) {
         return Scaffold(
           body: CustomScrollView(
@@ -26,21 +25,20 @@ class ItemReviewView extends StatelessWidget {
                 actions: [
                   IconButton(
                       onPressed: () {
-                        viewModel.onAddToCart(
-                            context, item.itemName, item.itemId);
+                        viewModel.editItem(context, cartItem.orderId);
                       },
-                      icon: const Icon((Icons.add_shopping_cart)))
+                      icon: const Icon((Icons.edit)))
                 ],
                 expandedHeight: 350.h,
                 collapsedHeight: 150.h,
                 flexibleSpace: PageView.builder(
-                  itemCount: item.images.length,
+                  itemCount: viewModel.item.images.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
                       decoration: BoxDecoration(
                           color: Colors.grey.shade50,
                           image: DecorationImage(
-                              image: NetworkImage(item.images[index]),
+                              image: NetworkImage(viewModel.item.images[index]),
                               fit: BoxFit.cover)),
                     );
                   },
@@ -54,37 +52,30 @@ class ItemReviewView extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Text3(text: item.brandName),
+                        Text3(text: viewModel.item.brandName),
                         const Icon(
                           Icons.star,
                           color: Colors.yellow,
                         ),
                         Text3(
-                            text: item.ratings.length.toString(), isBold: true),
-                        Text3(text: index.toString()),
+                            text: viewModel.item.ratings.length.toString(),
+                            isBold: true),
                         const Spacer(),
-                        IconButton(
-                            onPressed: () {
-                              viewModel.favorited();
-                            },
-                            icon: Icon(viewModel.isFavorite
-                                ? Icons.favorite
-                                : Icons.favorite_border)),
                       ],
                     ),
-                    Text1(text: item.itemName),
+                    Text1(text: viewModel.item.itemName),
                     Row(
                       children: [
-                        if (item.itemPrice != item.newPrice)
+                        if (viewModel.item.itemPrice != viewModel.item.newPrice)
                           Text1(
-                            text: '\$${item.itemPrice}',
+                            text: '\$${viewModel.item.itemPrice}',
                             color: Colors.red,
                           ),
                         SizedBox(
                           width: 10.w,
                         ),
                         Text2(
-                          text: '\$${item.newPrice}',
+                          text: '\$${viewModel.item.newPrice}',
                           color: Colors.green,
                         ),
                         Spacer(),
@@ -99,7 +90,7 @@ class ItemReviewView extends StatelessWidget {
                         Text2(text: viewModel.itemCount.toString()),
                         IconButton.filledTonal(
                             onPressed: () {
-                              viewModel.increment(item.itemCount);
+                              viewModel.increment(viewModel.item.itemCount);
                             },
                             icon: Icon(
                               Icons.add,
@@ -108,7 +99,7 @@ class ItemReviewView extends StatelessWidget {
                       ],
                     ),
                     Text3(
-                      text: item.description,
+                      text: viewModel.item.description,
                       color: Colors.grey.shade600,
                     ),
                     SizedBox(
@@ -125,10 +116,13 @@ class ItemReviewView extends StatelessWidget {
                               ),
                               Row(
                                 children: [
-                                  for (int x = 0; x < item.colors.length; x++)
+                                  for (int x = 0;
+                                      x < viewModel.item.colors.length;
+                                      x++)
                                     GestureDetector(
                                       onTap: () {
-                                        viewModel.pickColor(item.colors[x]);
+                                        viewModel.pickColor(
+                                            viewModel.item.colors[x]);
                                       },
                                       child: Container(
                                           margin: EdgeInsets.all(2.r),
@@ -136,17 +130,18 @@ class ItemReviewView extends StatelessWidget {
                                           width: 50.w,
                                           decoration: BoxDecoration(
                                             shape: BoxShape.circle,
-                                            color: pickColor(item.colors[x]),
+                                            color: pickColor(
+                                                viewModel.item.colors[x]),
                                             border: Border.all(
                                                 color: viewModel.colorPicked ==
-                                                        item.colors[x]
+                                                        viewModel.item.colors[x]
                                                     ? Colors.black
                                                     : Colors.grey),
                                           ),
                                           child: Center(
                                             child: Text3(
-                                              text: item.colors[x],
-                                              color: item.colors[x]
+                                              text: viewModel.item.colors[x],
+                                              color: viewModel.item.colors[x]
                                                           .toLowerCase() ==
                                                       'black'
                                                   ? Colors.white
@@ -167,10 +162,13 @@ class ItemReviewView extends StatelessWidget {
                               ),
                               Row(
                                 children: [
-                                  for (int x = 0; x < item.sizes.length; x++)
+                                  for (int x = 0;
+                                      x < viewModel.item.sizes.length;
+                                      x++)
                                     GestureDetector(
                                       onTap: () {
-                                        viewModel.pickSize(item.sizes[x]);
+                                        viewModel
+                                            .pickSize(viewModel.item.sizes[x]);
                                       },
                                       child: Container(
                                         margin: EdgeInsets.all(3.r),
@@ -178,22 +176,22 @@ class ItemReviewView extends StatelessWidget {
                                         width: 50.w,
                                         decoration: BoxDecoration(
                                           color: viewModel.sizePicked ==
-                                                  item.sizes[x]
+                                                  viewModel.item.sizes[x]
                                               ? Colors.black
                                               : Colors.white,
                                           borderRadius:
                                               BorderRadius.circular(10.r),
                                           border: Border.all(
                                               color: viewModel.sizePicked ==
-                                                      item.sizes[x]
+                                                      viewModel.item.sizes[x]
                                                   ? Colors.black
                                                   : Colors.grey),
                                         ),
                                         child: Center(
                                             child: Text1(
-                                          text: item.sizes[x],
+                                          text: viewModel.item.sizes[x],
                                           color: viewModel.sizePicked ==
-                                                  item.sizes[x]
+                                                  viewModel.item.sizes[x]
                                               ? Colors.white
                                               : Colors.black,
                                         )),
@@ -206,55 +204,6 @@ class ItemReviewView extends StatelessWidget {
                         ],
                       ),
                     ),
-                    viewModel.isLoading == true
-                        ? SizedBox(
-                            height: 200.h,
-                            width: 200.h,
-                            child: Center(child: CircularProgressIndicator()))
-                        : Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              GestureDetector(
-                                  onTap: () {
-                                    viewModel.onAddToCart(
-                                        context, item.itemName, item.itemId);
-                                  },
-                                  child: MyButton(
-                                    backgroundColor: Colors.white,
-                                    borderColor: Colors.black,
-                                    widget: Center(
-                                        child: Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 30.w),
-                                      child: Row(
-                                        children: [
-                                          const Icon(Icons.card_travel_rounded),
-                                          Text1(
-                                            text: 'ADD TO CART',
-                                            color: Colors.black,
-                                          ),
-                                        ],
-                                      ),
-                                    )),
-                                  )),
-                              GestureDetector(
-                                  onTap: () {
-                                    viewModel.onBuyNow(context);
-                                  },
-                                  child: MyButton(
-                                    backgroundColor: Colors.black,
-                                    widget: Center(
-                                        child: Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 30.w),
-                                      child: Text1(
-                                        text: 'BUY NOW',
-                                        color: Colors.white,
-                                      ),
-                                    )),
-                                  )),
-                            ],
-                          )
                   ],
                 ),
               ))
@@ -264,69 +213,4 @@ class ItemReviewView extends StatelessWidget {
       },
     );
   }
-}
-
-class MyButton extends StatelessWidget {
-  MyButton({
-    super.key,
-    required this.widget,
-    required this.backgroundColor,
-    this.borderColor = Colors.white,
-  });
-
-  final Widget widget;
-  final Color backgroundColor;
-  Color borderColor;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 40.h,
-      decoration: BoxDecoration(
-        color: backgroundColor,
-        border: Border.all(
-          color: borderColor,
-        ),
-      ),
-      child: widget,
-    );
-  }
-}
-
-Color pickColor(String colorPicked) {
-  Color returnColor = Colors.black;
-  String color = colorPicked.toLowerCase();
-  switch (color) {
-    case 'red':
-      returnColor = Colors.red;
-      break;
-    case 'green':
-      returnColor = Colors.green;
-      break;
-    case 'white':
-      returnColor = Colors.white;
-      break;
-    case 'purple':
-      returnColor = Colors.purple;
-      break;
-    case 'pink':
-      returnColor = Colors.pink;
-      break;
-    case 'blue':
-      returnColor = Colors.blue;
-      break;
-    case 'yellow':
-      Colors.yellow;
-      break;
-    case 'orange':
-      returnColor = Colors.orange;
-      break;
-    case 'grey':
-      returnColor = Colors.grey;
-      break;
-    case 'lime':
-      returnColor = Colors.lime;
-      break;
-  }
-  return returnColor;
 }

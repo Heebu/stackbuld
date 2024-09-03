@@ -4,6 +4,7 @@ import 'package:stacked/stacked.dart';
 
 import '../../viewmodel/user_screen/main_page_viewmodel.dart';
 import 'HomeScreen/home_view.dart';
+import 'MyCartScreen/cart_view.dart';
 import 'ProfileScreen/profile_view.dart';
 import 'SearchScreen/search_view.dart';
 
@@ -32,8 +33,14 @@ class MainPageView extends StatelessWidget {
             ),
             actions: [
               IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.notifications_active),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AllCartView(),
+                      ));
+                },
+                icon: const Icon(Icons.shopping_cart),
               )
             ],
           ),

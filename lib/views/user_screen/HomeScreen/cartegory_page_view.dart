@@ -4,7 +4,6 @@ import 'package:stacked/stacked.dart';
 
 import '../../../core/reuseable/Widgets/item_buttons.dart';
 import '../../../core/reuseable/Widgets/mainTextWidget.dart';
-import '../../../model/item_model.dart';
 import '../../../viewmodel/user_screen/category_page_viewmodel.dart';
 
 class CategoryPageView extends StatelessWidget {
@@ -15,6 +14,7 @@ class CategoryPageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
+      onViewModelReady: (viewModel) => viewModel.getItems(pageTitle),
       viewModelBuilder: () => CategoryPageViewmodel(),
       builder: (context, viewModel, child) {
         return Scaffold(
@@ -29,23 +29,10 @@ class CategoryPageView extends StatelessWidget {
                   mainAxisExtent: 250.h,
                   crossAxisSpacing: 3.w),
               itemBuilder: (context, index) => MyItemBox(
-                itemModel: const ItemModel(
-                    itemName: 'Versasse dress',
-                    description: 'This is an exclusive wear for everyone ',
-                    brandName: 'H&M',
-                    colors: ['red', 'blue', 'green'],
-                    favorites: [],
-                    images: [
-                      'https://e7.pngegg.com/pngimages/46/284/png-clipart-cocktail-dress-clothing-sleeve-prom-blue-tee-dress-blue-orange-thumbnail.png',
-                      'https://png.pngtree.com/png-clipart/20210725/original/pngtree-wedding-dress-clipart-blue-color-illustration-design-png-image_6557291.jpg'
-                    ],
-                    itemPrice: 2000,
-                    newPrice: 1500,
-                    ratings: [],
-                    sizes: ['M', 'L', 'XL', 'XXL']),
+                itemModel: viewModel.items[index],
                 index: index,
               ),
-              itemCount: 5,
+              itemCount: viewModel.items.length,
             ),
           ),
         );

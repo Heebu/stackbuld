@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../model/item_model.dart';
 import '../../../views/user_screen/HomeScreen/item_review_view.dart';
+import 'app_properties.dart';
 import 'mainTextWidget.dart';
 
 class MyItemBox extends StatelessWidget {
@@ -43,18 +44,21 @@ class MyItemBox extends StatelessWidget {
                   child: Stack(children: [
                     Expanded(
                         child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.r),
-                              image: DecorationImage(
-                                  image: NetworkImage(itemModel.images[0]))),
-                        )),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.r),
+                          image: DecorationImage(
+                              image: NetworkImage(itemModel.images[0]),
+                              fit: BoxFit.cover)),
+                    )),
                     Align(
                         alignment: Alignment.topRight,
                         child: IconButton.filledTonal(
                             onPressed: () {
-                              itemModel.favorites.contains('Idris Adedeji')
-                                  ? itemModel.favorites.remove('Idris Adedeji')
-                                  : itemModel.favorites.add('Idris Adedeji');
+                              itemModel.favorites.contains(AppProperties.userId)
+                                  ? itemModel.favorites
+                                      .remove(AppProperties.userId)
+                                  : itemModel.favorites
+                                      .add(AppProperties.userId);
                             },
                             icon: itemModel.favorites.contains('Idris Adedeji')
                                 ? const Icon(Icons.favorite)
@@ -62,38 +66,38 @@ class MyItemBox extends StatelessWidget {
                   ])),
               Container(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
                     children: [
-                      Row(
-                        children: [
-                          Text3(text: itemModel.brandName),
-                          const Icon(
-                            Icons.star,
-                            color: Colors.yellow,
-                          ),
-                          Text3(text: itemRating, isBold: true),
-                          Text3(text: index.toString()),
-                        ],
+                      Text3(text: itemModel.brandName),
+                      const Icon(
+                        Icons.star,
+                        color: Colors.yellow,
                       ),
-                      Text1(text: itemModel.itemName),
-                      Row(
-                        children: [
-                          if (itemModel.itemPrice != itemModel.newPrice)
-                            Text1(
-                              text: '\$${itemModel.itemPrice}',
-                              color: Colors.red,
-                            ),
-                          SizedBox(
-                            width: 10.w,
-                          ),
-                          Text2(
-                            text: '\$${itemModel.newPrice}',
-                            color: Colors.green,
-                          ),
-                        ],
+                      Text3(text: itemRating, isBold: true),
+                      Text3(text: index.toString()),
+                    ],
+                  ),
+                  Text1(text: itemModel.itemName),
+                  Row(
+                    children: [
+                      if (itemModel.itemPrice != itemModel.newPrice)
+                        Text1(
+                          text: '\$${itemModel.itemPrice}',
+                          color: Colors.red,
+                        ),
+                      SizedBox(
+                        width: 10.w,
+                      ),
+                      Text2(
+                        text: '\$${itemModel.newPrice}',
+                        color: Colors.green,
                       ),
                     ],
-                  ))
+                  ),
+                ],
+              ))
             ],
           )),
     );
