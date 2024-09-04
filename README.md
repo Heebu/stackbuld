@@ -49,5 +49,5 @@ purpose)
 3. Run `flutter pub get` to download dependencies.
 4. Run `flutter run` to launch the app on a connected device or emulator.
 
-**Credites to the Design **
+**Credits to the Design **
 https://dribbble.com/shots/24095196-Fashion-E-Commerce-App
