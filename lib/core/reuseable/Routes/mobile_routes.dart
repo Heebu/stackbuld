@@ -8,12 +8,11 @@ import '../../../views/user_screen/HomeScreen/home_view.dart';
 import '../../../views/user_screen/main_page_view.dart';
 
 Map<String, Widget Function(BuildContext)> route = {
-  '/': (context) => const MainPageView(),
+  '/': (context) => const SignIn(),
+  '/main_page_view': (context) => const MainPageView(),
   '/user_home': (context) => const UserHome(),
   '/login': (context) => const SignIn(),
   '/signup': (context) => const SignUpScreen(),
   '/SignUpMore': (context) => const SignUpMoreScreen(),
   '/forgot_password': (context) => const ForgetPassword(),
 };
-
-

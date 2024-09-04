@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stackbuld/core/reuseable/Widgets/mainTextWidget.dart';
+import 'package:stackbuld/model/item_model.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../viewmodel/user_screen/main_page_viewmodel.dart';
@@ -41,7 +42,8 @@ class MainPageView extends StatelessWidget {
                       ));
                 },
                 icon: const Icon(Icons.shopping_cart),
-              )
+              ),
+
             ],
           ),
           body: PageView(
